@@ -7,7 +7,7 @@ import android.os.Bundle;
 import com.example.keepalivedemo.aty.KeepManager;
 
 public class MainActivity extends AppCompatActivity {
-//    KeepManager keepManager;
+    KeepManager keepManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -15,8 +15,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         //1像素保活
-//        keepManager = new KeepManager();
-//        keepManager.registerKeep(this);
+        keepManager = new KeepManager();
+        keepManager.registerKeep(this);
 
 //        JobScheduler
         //        MyJobService.startJob(this);
@@ -25,6 +25,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-//        keepManager.unregisterKeep(this);//Activity退出时解注册
+        keepManager.unregisterKeep(this);//Activity退出时解注册
     }
 }
