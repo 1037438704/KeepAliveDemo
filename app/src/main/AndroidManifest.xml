@@ -2,6 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.keepalivedemo">
 
+    <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS" />
+    <uses-permission
+        android:name="android.permission.READ_SYNC_SETTINGS" />
+    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS" />
+    <uses-permission
+        android:name="android.permission.GET_ACCOUNTS" />
+
 
     <application
         android:allowBackup="true"
@@ -18,8 +25,30 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".ForegroundService$InnerService" />
-        <service android:name=".StickyService" />
+        <service android:name=".account.SyncService">
+            <intent-filter>
+                <action android:name="android.content.SyncAdapter" />
+            </intent-filter>
+            <meta-data
+                android:name="android.content.SyncAdapter"
+                android:resource="@xml/sync_adapter" />
+
+
+        </service>
+        <service android:name=".account.AuthenticationService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.accounts.AccountAuthenticator" />
+            </intent-filter>
+            <meta-data
+                android:name="android.accounts.AccountAuthenticator"
+                android:resource="@xml/account_authenticator" />
+        </service>
+
+        <provider
+            android:name=".account.SyncProvider"
+            android:authorities="com.example.keepalivedemo.provider" />
     </application>
 
 </manifest>
