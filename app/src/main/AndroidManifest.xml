@@ -18,8 +18,8 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".ForegroundService" />
         <service android:name=".ForegroundService$InnerService" />
+        <service android:name=".StickyService" />
     </application>
 
 </manifest>
